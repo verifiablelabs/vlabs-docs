@@ -9,10 +9,25 @@
 - `ModelProvider` interface (`validate_config` / `estimate_cost` / `run` /
   `dry_run`) with a deterministic `DummyProvider`.
 
+## Install
+
+```bash
+pip install vlabs-sdk   # import name: vlabs_sdk
+```
+
+```python
+from vlabs_sdk.providers.dummy_provider import DummyProvider
+from vlabs_sdk.schemas import AssuranceCardV2, ScoreSet
+from vlabs_sdk.run_config import default_config
+```
+
+(Migrating from the legacy `verifiable-labs-envs` package? See
+[vlabs-sdk MIGRATION.md](https://github.com/verifiablelabs/vlabs-sdk/blob/main/MIGRATION.md).)
+
 ## clean-gate CLI
 
 ```bash
-vlabs-prm-eval clean-gate --old baseline.json --new candidate.json
+vlabs clean-gate --old baseline.json --new candidate.json
 # exit 0 = ACCEPT, exit 1 = REJECT (reasons printed)
 ```
 
