@@ -1,8 +1,7 @@
 # Provenance
 
-Clean import (no history rewrite) from `verifiablelabs/verifiable-labs-envs`
-at commit `a0f30dc547a73aaae8608d193f94035192404627` (main). Docs authored fresh from approved positioning; no private implementation details.
+Clean import (no history rewrite) from the archived legacy workspace at commit
+`a0f30dc547a73aaae8608d193f94035192404627`. Docs were authored fresh from
+approved positioning; no private implementation details were imported.
 
-The source monorepo remains canonical until the split flips; this mirror is
-refreshed by the migration tooling documented in
-`verifiable-labs-private/docs/ops/github-repo-split-migration.md`.
+`vlabs-docs` is now canonical for the public documentation in this repository.
