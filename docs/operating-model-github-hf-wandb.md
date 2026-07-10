@@ -19,8 +19,10 @@ Public, **synthetic / redacted** demo evidence:
 - **Hugging Face dataset** — <https://huggingface.co/datasets/verifiablelabs/vlabs-clean-gate-evidence>
 - **Weights & Biases** (entity `verifiable-labs`): [clean-generalization-gate](https://wandb.ai/verifiable-labs/clean-generalization-gate) · [contamination-firewall](https://wandb.ai/verifiable-labs/contamination-firewall) · [anti-hack-engine](https://wandb.ai/verifiable-labs/anti-hack-engine) · [scenario-compiler](https://wandb.ai/verifiable-labs/scenario-compiler) · [runpod-costs](https://wandb.ai/verifiable-labs/runpod-costs)
 
-All published evidence is **synthetic / redacted** and is **not a training
-dataset**. It contains **no** customer data, hidden evaluations, gold
-answers, raw traces, private anti-hack traps, or private engine internals.
+The HF/W&B demo artifacts are **synthetic / redacted** and are not a training
+dataset. Separately, `vlabs-evidence/results/` contains clearly labelled real
+measurements on public benchmark datasets. Neither surface contains customer
+data, hidden evaluations, gold answers, raw traces, private anti-hack traps, or
+private engine internals.
 
 Install the SDK: `pip install "vlabs-sdk==0.0.2"`

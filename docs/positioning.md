@@ -24,4 +24,4 @@ guarantee general intelligence. We do not claim to have a "formally verified sys
 We never claim to prove that a model generalizes, and we never claim to eliminate contamination.
 The only formal claim we make is:
 
-> Selected mathematical properties behind the contamination-resistant promotion gate are machine-verified in Lean 4. The implementation is property-tested against the formal specification.
+> Selected mathematical properties behind the contamination-resistant promotion gate are machine-verified in Lean 4. A hand-maintained Python mirror has property tests derived from selected definitions; no mechanized code-to-proof parity is claimed.
