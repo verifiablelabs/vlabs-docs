@@ -1,27 +1,49 @@
 # Positioning
 
-**Primary sentence.** Verifiable Labs helps AI agents improve through
-generated clean feedback loops, then verifies whether those improvements
-truly generalize before promotion.
+**Primary sentence.** Enthym develops AI learning methods, starting with coding
+and using verification to study the quality of feedback.
 
-**Short.** Verifiable Labs builds clean feedback and promotion gates for increasingly general AI agents.
+**Research direction.** Increasingly general models that learn reliably from
+experience. World models and AGI are future research goals, not achieved
+capabilities. Verification and evaluation support that program.
 
-**Category.** Agent-generalization infrastructure / clean feedback
-substrate — not a benchmark runner, not an RL training platform, not an
-AGI lab.
+## Brand and technical identity
 
-## Vocabulary we use
+Use **Enthym** for the startup in current prose. Explain once, where useful,
+that public work is hosted by the existing `verifiablelabs` organization and
+retains Verifiable Labs technical identifiers. Preserve repository URLs,
+package names, imports, CLI names, historical citations, and license attribution.
+Brand wording is not an instruction to rename or republish anything.
 
-increasingly general AI agents · clean feedback loops · generated
-hidden/OOD/adversarial scenarios · generalization improvement · promotion
-gate · clean transfer · contamination-resistant evaluation · clean
-feedback substrate.
+## Describe status precisely
 
-## Claims we do not make
+| Evidence or status | Appropriate language |
+|---|---|
+| Implemented public code | Name the interface or tool and link its source; describe constraints |
+| Synthetic demonstration | Label it illustrative; state the mechanism or format demonstrated |
+| Historical measured report | Name the dataset, endpoint, revision limits, and original interpretation |
+| Planned research | Use “we intend to study” or “research goal” without a capability headline |
+| Service or package availability | Verify the actual release or deployment separately from source code |
 
-We do not claim to build, solve, or prove AGI, and we do not claim to
-guarantee general intelligence. We do not claim to have a "formally verified system/product/API/code".
-We never claim to prove that a model generalizes, and we never claim to eliminate contamination.
-The only formal claim we make is:
+The [research overview](product-overview.md) separates these categories. Model
+capability claims need an approved, inspectable evidence package; a verifier
+result or synthetic card is not a model benchmark.
 
-> Selected mathematical properties behind the contamination-resistant promotion gate are machine-verified in Lean 4. A hand-maintained Python mirror has property tests derived from selected definitions; no mechanized code-to-proof parity is claimed.
+## Claim boundaries
+
+We do not claim achieved AGI, unbounded self-improvement, demonstrated
+frontier-model capability, or equivalence to OpenAI or Anthropic.
+We do not claim independent certification or a compliance audit from a tool
+report, assurance-card name, checksum, or selected theorem.
+We do not claim that filtering eliminates contamination.
+We do not claim a formally verified system, product, API, or training algorithm.
+
+The formal scope is:
+
+> Selected mathematical properties behind the contamination-resistant
+> promotion gate are machine-verified in Lean 4. A hand-maintained Python
+> mirror has property tests derived from selected definitions; no mechanized
+> code-to-proof parity is claimed.
+
+State assumptions alongside a theorem. Passing a defined gate does not prove
+a model's generalization, population performance, or service security.

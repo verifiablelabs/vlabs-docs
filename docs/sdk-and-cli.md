@@ -1,19 +1,26 @@
-# SDK and CLI (public surface)
+# SDK and CLI
 
-## Schemas and config
+The public SDK provides evaluation contracts, typed evidence, provider
+interfaces, and a promotion-gate CLI. It is supporting infrastructure for the
+model research program; it does not contain a trained model.
 
-- `RunConfig` — modes `evaluate_only` (default) / `gate_only` /
-  `improve_and_gate` / `substrate`, privacy-preserving defaults.
-- `EvaluationContract`, `ScoreSet`, `TransferMetrics`, `GateOutcome`,
-  `AssuranceCardV2`, split policy validation.
-- `ModelProvider` interface (`validate_config` / `estimate_cost` / `run` /
-  `dry_run`) with a deterministic `DummyProvider`.
+## Local setup
 
-## Install
+Requires Python 3.11+. Installing from the maintained checkout avoids relying
+on a stale version in an older documentation page. Installation needs network
+access for dependencies.
 
 ```bash
-pip install vlabs-sdk   # import name: vlabs_sdk
+git clone https://github.com/verifiablelabs/vlabs-sdk.git
+cd vlabs-sdk
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install .
+vlabs --help
+vlabs clean-gate --help
 ```
+
+The import package is `vlabs_sdk`; the command is `vlabs`.
 
 ```python
 from vlabs_sdk.providers.dummy_provider import DummyProvider
@@ -21,15 +28,29 @@ from vlabs_sdk.schemas import AssuranceCardV2, ScoreSet
 from vlabs_sdk.run_config import default_config
 ```
 
-(Migrating from the legacy `verifiable-labs-envs` package? See
-[vlabs-sdk MIGRATION.md](https://github.com/verifiablelabs/vlabs-sdk/blob/main/MIGRATION.md).)
-
-## clean-gate CLI
+To compare existing, schema-valid score files:
 
 ```bash
 vlabs clean-gate --old baseline.json --new candidate.json
-# exit 0 = ACCEPT, exit 1 = REJECT (reasons printed)
+# exit 0 = ACCEPT; exit 1 = REJECT; exit 2 = INCONCLUSIVE for missing/invalid evidence
 ```
 
-See runnable demos in
-[vlabs-examples](https://github.com/verifiablelabs/vlabs-examples).
+`baseline.json` and `candidate.json` are inputs you supply, not files created
+by the installation. Use [vlabs-examples](https://github.com/verifiablelabs/vlabs-examples)
+for synthetic inputs and the
+[SDK migration notes](https://github.com/verifiablelabs/vlabs-sdk/blob/main/MIGRATION.md)
+for the current card format. Gate acceptance checks supplied evidence against
+defined criteria; it is not a new model evaluation.
+
+## Interfaces
+
+- `RunConfig`: `evaluate_only`, `gate_only`, `improve_and_gate`, and `substrate`.
+- `EvaluationContract`, `ScoreSet`, `TransferMetrics`, `GateOutcome`, and
+  `AssuranceCardV2`, with split-policy validation.
+- `ModelProvider`: `validate_config`, `estimate_cost`, `run`, and `dry_run`;
+  the public implementation includes `DummyProvider`.
+
+The evaluation configuration defaults to no export and no future training
+reuse. These are requested configuration values; runtime enforcement must be
+verified in the owning workflow. They do not describe separate, explicitly
+configured model-training experiments.

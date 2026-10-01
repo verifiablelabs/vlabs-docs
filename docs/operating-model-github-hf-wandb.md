@@ -1,28 +1,51 @@
-# Operating model: GitHub / Hugging Face / W&B (public summary)
+# Code, artifacts, and publication
 
-- **GitHub** — open-core split: SDK contracts, formal track, examples,
-  evidence, and docs are public; scenario generation, contamination
-  firewall, anti-hack engine, platform, and all runs/data are private.
-- **Hugging Face** — only redacted, license-clean artifacts are ever
-  published, gated by an export-policy check and an explicit approval flag.
-- **Weights & Biases** — dashboards carry sanitized metrics only (no
-  hidden-eval content, no raw traces, no keys), same approval gating.
+**GitHub** holds maintained code, specifications, documentation, and approved
+result summaries for Enthym. The [public repository map](repository-map.md)
+lists public surfaces only. Internal ownership and research findings stay in
+access-controlled records; private access does not authorize public export.
 
-What is never published anywhere: hidden evaluation content, gold answers,
-anti-hack detection details, private verifier logic, raw or customer
-traces, secrets.
+**Hugging Face** can hold approved model/data releases with license and
+provenance review. The public evidence repository links to a
+[clean-gate evidence dataset](https://huggingface.co/datasets/verifiablelabs/vlabs-clean-gate-evidence)
+and labels that material synthetic/redacted, rather than a trained checkpoint
+or training dataset. This page does not establish current host availability.
 
-## Published evidence
+**Weights & Biases** can hold sanitized experiment metrics. The public evidence
+repository links to [clean-generalization-gate](https://wandb.ai/verifiable-labs/clean-generalization-gate)
+as synthetic demonstration material. A dashboard or run name alone is not
+proof of a completed model-training experiment. See the
+[public evidence README](https://github.com/verifiablelabs/vlabs-evidence/blob/main/README.md)
+for the source of those descriptions.
 
-Public, **synthetic / redacted** demo evidence:
+## Evidence categories
 
-- **Hugging Face dataset** — <https://huggingface.co/datasets/verifiablelabs/vlabs-clean-gate-evidence>
-- **Weights & Biases** (entity `verifiable-labs`): [clean-generalization-gate](https://wandb.ai/verifiable-labs/clean-generalization-gate) · [contamination-firewall](https://wandb.ai/verifiable-labs/contamination-firewall) · [anti-hack-engine](https://wandb.ai/verifiable-labs/anti-hack-engine) · [scenario-compiler](https://wandb.ai/verifiable-labs/scenario-compiler) · [runpod-costs](https://wandb.ai/verifiable-labs/runpod-costs)
+Keep these separate in filenames, descriptions, and claims:
 
-The HF/W&B demo artifacts are **synthetic / redacted** and are not a training
-dataset. Separately, `vlabs-evidence/results/` contains clearly labelled real
-measurements on public benchmark datasets. Neither surface contains customer
-data, hidden evaluations, gold answers, raw traces, private anti-hack traps, or
-private engine internals.
+- Synthetic fixtures demonstrate formats and workflow behavior.
+- Historical measured reports describe recorded results with their original
+  limitations; new source fixes do not retroactively revalidate them.
+- Model-training records connect actual fitting to evaluated checkpoints.
+- Reproducible model releases additionally supply loadable permitted
+  artifacts, immutable dependencies, and a documented evaluation procedure.
 
-Install the SDK: `pip install "vlabs-sdk==0.0.2"`
+The current public benchmark reports live separately in
+[vlabs-evidence/results](https://github.com/verifiablelabs/vlabs-evidence/tree/main/results).
+They must be read alongside the
+[reproducibility notes](https://github.com/verifiablelabs/vlabs-evidence/blob/main/reproducibility-notes.md).
+The [research overview](product-overview.md) separates public evidence categories.
+
+## Preparing a model result
+
+Join the hypothesis and preregistered endpoint to exact code, model/tokenizer,
+data and split revisions; initial/final checkpoint hashes; environment and
+commands; run identifiers; denominators and analysis; compute accounting; and
+negative results. State whether learning changed weights, agent configuration,
+or both. Retain protected raw artifacts in approved private storage.
+
+Publication requires the repository's applicable export-policy checks and
+explicit approval. The public evidence README describes approval flags and
+dry-run defaults; this page does not independently verify exporter enforcement
+or establish that a particular upload occurred. Never publish
+protected evaluation content, gold answers, private detector details,
+customer/raw traces, or credentials. See [data boundaries](security-boundary.md).

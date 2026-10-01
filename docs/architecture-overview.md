@@ -1,25 +1,42 @@
-# Architecture overview (public)
+# Public architecture overview
 
-Verifiable Labs runs an Evaluate / Improve / Gate / Substrate pipeline:
+Enthym's public work connects evaluation interfaces, verification specifications,
+and evidence records. The [public repository map](repository-map.md) identifies
+their maintained homes.
 
-1. **Contract compiler** turns an agent goal into an evaluation contract.
-2. **Scenario generator** produces public / hidden / OOD / adversarial
-   scenarios (generated after freeze — never reused from training corpora).
-3. **Evaluation** runs the agent through a provider abstraction
-   (dummy provider in the open SDK; commercial providers server-side).
-4. **Contamination firewall** scores data-contamination risk (DCR) and
-   enforces split policy; **anti-hack scanning** scores hack risk.
-5. **Clean promotion gate** decides ACCEPT / REJECT / LIMITED_ROLLOUT from
-   clean VGS, generalization gap, and regression checks.
-6. **Assurance card** records the decision; **substrate records** capture
-   transfer metrics and failure memory under an explicit data policy.
+## Interfaces
 
-The open-source surface is the SDK contracts ([vlabs-sdk](https://github.com/verifiablelabs/vlabs-sdk))
-and the formal track ([vlabs-formal](https://github.com/verifiablelabs/vlabs-formal)).
-Scenario generation, the firewall, anti-hack detection details, and the
-platform are private — that separation keeps the feedback clean.
+The SDK defines evaluation contracts, score sets, split policies, transfer
+metrics, and assurance cards. Its provider interface includes a deterministic
+dummy provider. The promotion-gate CLI compares supplied evidence with defined
+criteria; it does not itself produce a model-training result.
 
-Selected mathematical properties behind the contamination-resistant
-promotion gate are machine-verified in Lean 4. A hand-maintained Python mirror
-has property tests derived from selected definitions; no mechanized
-code-to-proof parity is claimed.
+The SDK configuration exposes the mode names `evaluate_only`, `gate_only`,
+`improve_and_gate`, and `substrate`, with capability flags. Those definitions
+do not themselves execute an evaluation, change a configuration, or collect
+records. A report must identify whether an intervention changes model
+parameters, prompts, memory, or configuration.
+
+## Verification
+
+The public integrity tool audits known deviation classes using a trusted
+reference and input generator. Passing those checks is scoped evidence, not
+proof that every possible solution is correct. Read that repository's execution
+and isolation requirements before using custom candidate source.
+
+Selected mathematical properties of the promotion gate are machine-verified in
+Lean 4. A hand-maintained Python mirror has property tests derived from selected
+definitions; no mechanized code-to-proof parity is claimed. These specifications
+do not prove the surrounding service or model-training outcomes.
+
+## Records and disclosure
+
+Public synthetic examples demonstrate the structure of supplied metrics and
+assurance cards. Historical benchmark reports measure particular verifier
+behavior under their recorded protocols. Neither establishes a released model
+checkpoint or general intelligence.
+
+Private implementations, evaluation material, and internal experiment findings
+stay in access-controlled records. Public summaries need evidence review and
+release approval. See [data boundaries](security-boundary.md) and
+[publication workflow](operating-model-github-hf-wandb.md).

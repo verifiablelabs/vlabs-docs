@@ -1,21 +1,34 @@
-# The public/private boundary
+# Data and implementation boundaries
 
-Clean feedback only stays clean if evaluation content cannot leak into
-training data or public corpora. The boundary is enforced as policy and
-code, not convention:
+The model research program needs both inspectable evidence and protected
+evaluation content. Training data, controller feedback, and final evaluation
+sets have different roles; their permitted uses must remain explicit.
 
-**Public** (Apache-2.0, on GitHub): the SDK contracts, Lean 4 formal track and
-its property-tested Python mirror, the `clean-gate` CLI, examples with
-synthetic data, synthetic/redacted demo evidence, and labelled results from
-public benchmark datasets.
+**Public:** SDK contracts and CLI, selected Lean specifications and Python
+mirrors, synthetic examples, public documentation, and approved labelled
+aggregate benchmark reports.
 
-**Private, never published**: hidden evaluation content and gold answers,
-anti-hack detection details and traps, private verifier logic, the
-contamination registry, raw and customer traces, secrets.
+**Private:** model-training implementations and internal run artifacts,
+protected evaluation content and gold answers, private verifier details,
+raw/customer traces, and credentials. A repository's code license does not
+change its visibility or authorize export of protected data.
 
-Operationally: exports are dry-run by default and pass a public-export
-policy check (classification-aware) before anything leaves the boundary;
-remote actions require explicit per-service approval flags; uploads are
-scanned and redacted; audit events record every gate decision and export.
+Follow each maintained repository's disclosure policy and review the applicable
+execution and export path before releasing an artifact. This public page does
+not establish private implementation details or deployed enforcement.
 
-Selected mathematical properties behind the contamination-resistant promotion gate are machine-verified in Lean 4. A hand-maintained Python mirror has property tests derived from selected definitions; no mechanized code-to-proof parity is claimed.
+The public SDK's default `RunConfig` sets `public_export=false` and
+`allow_future_training_use=false`. These are requested configuration values;
+runtime enforcement must be verified in the owning workflow. Model-training
+experiments require their own explicit training-data policy and split manifest.
+A final test set must stay outside training and any controller feedback if it is described as sealed; a reused validation score is a control
+signal, even when the underlying task text remains hidden.
+
+Post-freeze generation, duplicate checks, and access controls reduce specific
+contamination risks. They do not prove novelty relative to unknown base-model
+training data. Formal results cover selected mathematical specifications,
+not the confidentiality or correctness of the whole service.
+
+Public result summaries must preserve provenance and limitations without
+including protected content. Follow the [publication workflow](operating-model-github-hf-wandb.md)
+and [security policy](../SECURITY.md).
