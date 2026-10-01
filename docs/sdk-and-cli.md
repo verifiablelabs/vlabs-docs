@@ -32,7 +32,7 @@ To compare existing, schema-valid score files:
 
 ```bash
 vlabs clean-gate --old baseline.json --new candidate.json
-# exit 0 = ACCEPT, exit 1 = REJECT (reasons printed)
+# exit 0 = ACCEPT; exit 1 = REJECT; exit 2 = INCONCLUSIVE for missing/invalid evidence
 ```
 
 `baseline.json` and `candidate.json` are inputs you supply, not files created
@@ -51,5 +51,6 @@ defined criteria; it is not a new model evaluation.
   the public implementation includes `DummyProvider`.
 
 The evaluation configuration defaults to no export and no future training
-reuse. Those defaults govern that workflow; they do not describe the separate,
-explicitly configured model-training experiments.
+reuse. These are requested configuration values; runtime enforcement must be
+verified in the owning workflow. They do not describe separate, explicitly
+configured model-training experiments.

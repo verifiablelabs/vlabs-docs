@@ -1,46 +1,48 @@
-# Local setup and entrypoints
+# Local entrypoints
 
-Choose the repository for the work you need. The [repository map](repository-map.md)
-is the ownership guide; archived monorepos are historical references.
+Choose a maintained repository from the [public map](repository-map.md).
+Archived repositories provide provenance and historical source.
 
-## Public documentation
+## Documentation
 
-Python 3.11+ is sufficient. No package installation is needed.
+With Python 3.11+ in a local checkout, run:
 
 ```bash
-git clone https://github.com/verifiablelabs/vlabs-docs.git
-cd vlabs-docs
 python3 -m unittest discover -s tests -v
 python3 scripts/check_docs.py
+git diff --check
+git diff --cached --check
 ```
 
-## Public SDK
+These commands use only the standard library. See [CONTRIBUTING](../CONTRIBUTING.md)
+for the review workflow and the checks' limits.
 
-Start with [SDK and CLI](sdk-and-cli.md) to install from a current checkout,
-inspect the gate command, and use the synthetic examples. The SDK does not
-include a trained Verifiable Labs model. A provider key is not required for
-its deterministic dummy provider or supplied-card gate.
+## SDK and demonstrations
 
-## Research contributors with private access
+Start with [SDK and CLI](sdk-and-cli.md), read the current card migration notes,
+and select compatible synthetic examples. The dummy provider and supplied-card
+gate require no provider key. The SDK does not include a trained Enthym model.
 
-| Work | Starting point |
-|---|---|
-| Coding post-training | [vlabs-selfimprove](https://github.com/verifiablelabs/vlabs-selfimprove): README, `PREREGISTRATION_V4.md`, `RESULTS_V4.md`, and `experiments/analyze_seal_v4.py` |
-| Learning-agent experiments | [vlabs-continual](https://github.com/verifiablelabs/vlabs-continual): README, `PREREGISTRATION_V6.md`, `RESULTS_V6.md`, and `experiments/analyze_v6.py` |
-| Experiment accounting | [vlabs-research](https://github.com/verifiablelabs/vlabs-research): typed episode records, split contracts, and transfer summaries |
-| Run planning | [vlabs-runs-internal](https://github.com/verifiablelabs/vlabs-runs-internal): configuration validation and plan output; no run executor |
-| Platform development | [vlabs-platform service README](https://github.com/verifiablelabs/vlabs-platform/blob/main/services/api/README.md): local API setup and dependencies |
+The [terminal demo](https://github.com/verifiablelabs/vlabs-demo) runs on embedded
+toy cases from a reviewed checkout. The [integrity tool](https://github.com/verifiablelabs/vlabs-integrity)
+has a different execution boundary: inspect its isolation requirements before
+custom audits. A demo command does not establish safe execution of arbitrary
+untrusted source.
 
-Begin by inspecting recorded results and running the relevant repository's
-local checks. Numeric result analysis is different from reproducing model
-inference or training. Training requires the repository's specified runtime,
-model/data access, compute budget, and experiment configuration; this docs
-checkout does not provision those resources.
+## Formal specifications and evidence
 
-## Evidence review
+Follow the formal repository's CONTRIBUTING file and separate Lean and Python
+workflows. For evidence changes, follow the evidence repository's validator
+and checksum policy. These checks validate different properties; passing one
+does not substitute for the others.
 
-Read the [evidence ledger](product-overview.md#evidence-ledger) before citing
-results. Public [reproducibility notes](https://github.com/verifiablelabs/vlabs-evidence/blob/main/reproducibility-notes.md)
-distinguish synthetic examples from historical measured reports. Any new
-model result should connect its exact code/data revisions, checkpoint hashes,
-held-out split, analysis, and limitations before it is used as a headline.
+## Internal contributions
+
+Contributors with private access should use the relevant repository's own
+instructions, current branch, and workflow. Confirm the owning repository
+before editing an integration copy. Keep private repository navigation and
+findings in approved internal records. Model/provider execution and publication
+require their own authorization, dependencies, and resource budget.
+
+See [contributor workflow](contributor-workflow.md) and
+[research direction and public evidence](product-overview.md).

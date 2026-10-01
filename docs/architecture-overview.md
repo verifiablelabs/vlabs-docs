@@ -1,59 +1,42 @@
-# Architecture overview
+# Public architecture overview
 
-The model research program connects three layers: learning code, verification
-and evaluation, and evidence. The [repository map](repository-map.md)
-identifies the maintained home for each component.
+Enthym's public work connects evaluation interfaces, verification specifications,
+and evidence records. The [public repository map](repository-map.md) identifies
+their maintained homes.
 
-## Model learning
+## Interfaces
 
-`vlabs-selfimprove` implements a coding loop: generate candidate solutions,
-select training examples, fit a QLoRA adapter, and evaluate. `vlabs-continual`
-adds experiments with curriculum control, persistent experience, and teacher
-feedback. The current implementations fit fresh adapters from the base model
-on accumulated experience; they do not incrementally update the previous
-cycle's adapter weights.
+The SDK defines evaluation contracts, score sets, split policies, transfer
+metrics, and assurance cards. Its provider interface includes a deterministic
+dummy provider. The promotion-gate CLI compares supplied evidence with defined
+criteria; it does not itself produce a model-training result.
 
-A change to a model's parameters is different from a prompt, memory prefix,
-or agent configuration change. Reports must identify which changed and
-measure each contribution through controls. The broader research goal is
-reliable transfer to new tasks, not a higher score under one evaluator.
+The SDK configuration exposes the mode names `evaluate_only`, `gate_only`,
+`improve_and_gate`, and `substrate`, with capability flags. Those definitions
+do not themselves execute an evaluation, change a configuration, or collect
+records. A report must identify whether an intervention changes model
+parameters, prompts, memory, or configuration.
 
-## Verification and evaluation
+## Verification
 
-The supporting evaluation architecture includes:
+The public integrity tool audits known deviation classes using a trusted
+reference and input generator. Passing those checks is scoped evidence, not
+proof that every possible solution is correct. Read that repository's execution
+and isolation requirements before using custom candidate source.
 
-1. Evaluation contracts and scenario drafts with explicit split policy.
-2. Provider interfaces and evaluation runners; the public SDK includes a
-   deterministic dummy provider.
-3. Checks for contamination risk and reward gaming, with evidence attached
-   to the decision.
-4. Promotion gates that compare supplied measurements against defined
-   criteria and produce typed assurance cards.
-5. Episode records, transfer summaries, and failure bookkeeping.
+Selected mathematical properties of the promotion gate are machine-verified in
+Lean 4. A hand-maintained Python mirror has property tests derived from selected
+definitions; no mechanized code-to-proof parity is claimed. These specifications
+do not prove the surrounding service or model-training outcomes.
 
-A generated scenario draft needs a trusted scoring oracle before it supports
-a semantic correctness claim. Generating after a recorded model freeze is a
-contamination-reduction measure: ordering timestamps does not authenticate
-them or rule out semantic overlap with unknown pretraining data. Likewise,
-passing a verifier is evidence under that verifier's scope, not proof that an
-accepted solution is correct on every input.
+## Records and disclosure
 
-The platform's four modes describe evaluation, gating, human-reviewed
-configuration suggestions, and record collection. Their `improve_and_gate`
-mode must not be confused with the parameter-training loops above. The
-`vlabs-research` record schemas and `vlabs-runs-internal` planning scaffold do
-not themselves train models or execute the planned experiments.
+Public synthetic examples demonstrate the structure of supplied metrics and
+assurance cards. Historical benchmark reports measure particular verifier
+behavior under their recorded protocols. Neither establishes a released model
+checkpoint or general intelligence.
 
-## Formal and data boundaries
-
-Selected mathematical properties behind the contamination-resistant
-promotion gate are machine-verified in Lean 4. A hand-maintained Python mirror
-has property tests derived from selected definitions; no mechanized
-code-to-proof parity is claimed. Theorems about accepted sequences assume the
-stated gate conditions hold; they do not guarantee that a training process
-will produce such a sequence.
-
-Private learning and evaluation components remain private. Public contracts,
-selected specifications, and approved aggregate evidence provide inspectable
-interfaces without exposing protected evaluation content. See
-[data boundaries](security-boundary.md).
+Private implementations, evaluation material, and internal experiment findings
+stay in access-controlled records. Public summaries need evidence review and
+release approval. See [data boundaries](security-boundary.md) and
+[publication workflow](operating-model-github-hf-wandb.md).

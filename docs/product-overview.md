@@ -1,54 +1,43 @@
-# Research program and evidence
+# Research direction and public evidence
 
-Verifiable Labs develops learning methods and models, beginning with coding.
-The commercial objective is to turn reliable learning from experience into
-useful model capabilities. Verification tools and the evaluation platform
-provide training feedback and measurement for that work.
+Enthym studies learning from experience, starting with coding and the quality
+of verification feedback. Public evaluation and audit tooling supports that
+research direction. World models and increasingly general intelligence are
+future goals; the artifacts below do not establish those capabilities.
 
-## Current program
+## Public evidence ledger
 
-| Area | Implemented or recorded today | Next research question |
+| Public surface | What it supports | Limits |
 |---|---|---|
-| Coding post-training | Filtered SFT with QLoRA adapters; generation, trajectory selection, fitting, and held-out evaluation in `vlabs-selfimprove` | Does better feedback improve correctness and transfer at a matched total budget? |
-| Learning agents | Curriculum/control experiments, persistent experience, and repeated fitting in `vlabs-continual` | Which gains come from weights, curriculum, replay, or the surrounding agent? |
-| Verification and formal methods | Reward-gameability checks, evidence schemas, split policy, promotion gates, and selected Lean specifications | How well do feedback signals predict downstream learning on new tasks? |
-| World models | Planned research direction; no trained world-model result established here | Can the method extend to learning environment dynamics and planning? |
+| [SDK](https://github.com/verifiablelabs/vlabs-sdk) | Typed contracts, a dummy provider, and CLI that gates supplied score cards | No trained model is supplied; accepting a card does not measure a new model |
+| [Formal track](https://github.com/verifiablelabs/vlabs-formal) | Selected mathematical specifications and a hand-maintained Python mirror | Explicit assumptions; no mechanized implementation-to-proof parity or whole-service proof |
+| [Integrity tooling](https://github.com/verifiablelabs/vlabs-integrity) | Audits against known deviation classes under a trusted reference and input generator | No universal correctness or unhackability claim; review the execution boundary |
+| [Benchmark reports](https://github.com/verifiablelabs/vlabs-evidence/tree/main/results) | Historical reported verifier measurements on public benchmarks | Incomplete execution-time source/data revision records; no model-training results or newly reproduced runs |
+| [Evidence fixtures](https://github.com/verifiablelabs/vlabs-evidence/tree/main/evidence) and [SDK examples](https://github.com/verifiablelabs/vlabs-examples) | Illustrative formats and synthetic supplied metrics | No measured customer or model capability |
+| [Terminal demo](https://github.com/verifiablelabs/vlabs-demo) | Mechanism demonstration on constructed toy cases | No field detection, false-positive, latency, or model-comparison measurement |
 
-The implemented training is parameter adaptation of existing pretrained
-models. Each current cycle fits a fresh adapter from the original base using
-accumulated examples. This is filtered SFT with persistent experience; a
-continuing-weight learning method remains a separate experiment.
+Read the public [reproducibility notes](https://github.com/verifiablelabs/vlabs-evidence/blob/main/reproducibility-notes.md)
+alongside historical measurements. Artifact checksums protect recorded bytes;
+they do not independently attest to the original experiment or provide missing
+run-time provenance. Source fixes do not retroactively revalidate old results.
 
-## Evidence ledger
+## Evidence needed for a model result
 
-This summary describes the reviewed V4/V6 experiment records, not a new
-training run or an independent checkpoint reproduction. Private links require
-organization access.
+An approved public model claim should identify the tested hypothesis, exact
+code/model/data revisions, permitted checkpoint artifacts, train/validation/test
+roles, evaluated endpoint, denominators, uncertainty, controls, compute
+accounting, and limitations. Explain whether changes affect model parameters,
+agent configuration, or both. Describe saved-record analysis separately from
+training or inference reproduction.
 
-| Evidence | Supported conclusion | Boundary |
-|---|---|---|
-| [Selfimprove V4](https://github.com/verifiablelabs/vlabs-selfimprove/blob/main/RESULTS_V4.md) | The Llama comparison found lower hidden-test failure among visible-test-passing outputs after verifier-filtered training | The metric includes ordinary incorrect generalization as well as shortcuts; held-out accuracy superiority was not established. The smaller Gemma comparison was inconclusive. |
-| [Continual V6](https://github.com/verifiablelabs/vlabs-continual/blob/main/RESULTS_V6.md) | Recorded model fitting and exploratory transfer between coding families | The preregistered external transfer comparison did not establish a model-controller advantage. Equal fit/row budgets are not proof of equal tokens or total compute. |
-| [Public benchmark reports](https://github.com/verifiablelabs/vlabs-evidence/tree/main/results) | Historical measurements of particular verifier behavior on public benchmarks | Execution-time source/data revisions are incomplete; these are not model-training results or newly reproduced runs. Read the [reproducibility notes](https://github.com/verifiablelabs/vlabs-evidence/blob/main/reproducibility-notes.md). |
-| [Public examples](https://github.com/verifiablelabs/vlabs-evidence/tree/main/evidence) | Synthetic demonstrations of evidence and assurance-card formats | These are illustrative, not measured model capability or training datasets. |
-| [Formal track](https://github.com/verifiablelabs/vlabs-formal) | Selected mathematical properties under explicit assumptions | It does not prove the surrounding service, training outcomes, general intelligence, or implementation-to-proof equivalence. |
+Internal studies and private repository findings are reviewed in access-controlled
+records. This page publishes no internal result summary. A public model release
+or hosted endpoint needs its own release evidence and availability checks.
 
-The reviewed training repositories contain training logs and saved result
-records, but not a complete checkpoint bundle that an outside researcher can
-load and independently reproduce. Artifact recovery, immutable revisions,
-sealed evaluation, and a checkpoint/evaluation package are the next evidence
-milestone. No released checkpoint is implied by the SDK or synthetic demos.
+## Interfaces and availability
 
-## Direction
-
-Near-term work centers on reproducible coding-model results, controlled
-learning-agent experiments, and separating gains from feedback, training
-data, and curriculum. World models are a planned extension beyond coding.
-Increasing generality and AGI are long-term goals; neither is a current
-experimental result.
-
-The existing evaluation platform remains supporting infrastructure. Its
-`evaluate_only`, `gate_only`, `improve_and_gate`, and `substrate` modes describe
-software interfaces; they are not evidence that a commercial model endpoint
-or every hosted workflow is currently available. See
-[architecture](architecture-overview.md) and [local entrypoints](onboarding.md).
+The SDK's `evaluate_only`, `gate_only`, `improve_and_gate`, and `substrate`
+modes are software interfaces. Their names do not establish that every hosted
+workflow is available or that each mode trains parameters. See
+[architecture](architecture-overview.md), [local entrypoints](onboarding.md),
+and the [public repository map](repository-map.md).

@@ -13,16 +13,15 @@ protected evaluation content and gold answers, private verifier details,
 raw/customer traces, and credentials. A repository's code license does not
 change its visibility or authorize export of protected data.
 
-The platform includes classification-aware export checks and separate
-publication controls. Their existence does not establish that every workflow
-or deployed service enforces an end-to-end boundary. Follow each maintained
-repository's security policy, and verify the applicable execution and export
-path before releasing an artifact.
+Follow each maintained repository's disclosure policy and review the applicable
+execution and export path before releasing an artifact. This public page does
+not establish private implementation details or deployed enforcement.
 
-Evaluation-only defaults prohibit training reuse and export. Model-training
-experiments require their own explicit training-data policy and split
-manifest. A final test set must stay outside training and any controller
-feedback if it is described as sealed; a reused validation score is a control
+The public SDK's default `RunConfig` sets `public_export=false` and
+`allow_future_training_use=false`. These are requested configuration values;
+runtime enforcement must be verified in the owning workflow. Model-training
+experiments require their own explicit training-data policy and split manifest.
+A final test set must stay outside training and any controller feedback if it is described as sealed; a reused validation score is a control
 signal, even when the underlying task text remains hidden.
 
 Post-freeze generation, duplicate checks, and access controls reduce specific

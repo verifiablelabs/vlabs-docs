@@ -1,41 +1,44 @@
-# Verifiable Labs documentation
+# Enthym documentation
 
-Verifiable Labs is a commercial AI model company working toward increasingly
-general, self-improving intelligence. Our current research starts with
-verifier-guided post-training of coding models, supported by evaluation,
-agent-learning experiments, and selected formal specifications.
+Enthym develops AI learning methods, starting with coding and using verification
+to study the quality of feedback. Increasingly general models are a research
+goal. Our public work provides evaluation interfaces, selected formal
+specifications, audit tools, and evidence formats.
+
+The GitHub organization remains `verifiablelabs`; repository and package names
+retain their Verifiable Labs identifiers. Use Enthym for the startup brand while
+preserving technical names and historical attribution.
 
 ## Start here
 
-- [Research program and evidence](docs/product-overview.md): implemented
-  training, recorded findings, limitations, and planned world-model research.
-- [Repository map](docs/repository-map.md): where each maintained component
-  lives, what is private, and which repositories are archived.
-- [Local setup and contributor entrypoints](docs/onboarding.md): begin with
-  documentation, SDK examples, or the relevant private research repository.
-- [Architecture](docs/architecture-overview.md): how model learning and
-  verification fit together.
-- [Positioning and claim boundaries](docs/positioning.md),
-  [data boundaries](docs/security-boundary.md), and
-  [publication workflow](docs/operating-model-github-hf-wandb.md).
+- [Research direction and public evidence](docs/product-overview.md): scope,
+  demonstrations, historical reports, and evidence needed for a model claim.
+- [Public repository map](docs/repository-map.md): implemented tools,
+  demonstrations, monitoring configuration, and the archived predecessor.
+- [Local entrypoints](docs/onboarding.md) and
+  [contributor workflow](docs/contributor-workflow.md): where to start,
+  validate a change, and prepare it for review.
+- [Architecture](docs/architecture-overview.md),
+  [positioning](docs/positioning.md), [data boundaries](docs/security-boundary.md),
+  and [publication workflow](docs/operating-model-github-hf-wandb.md).
 
 ## Check these docs locally
 
-Requires Python 3.11 or newer. The checks use the standard library only;
-there is no package install, model download, GPU, or provider key.
+Requires Python 3.11 or newer. These checks use the standard library only.
 
 ```bash
-git clone https://github.com/verifiablelabs/vlabs-docs.git
-cd vlabs-docs
 python3 -m unittest discover -s tests -v
 python3 scripts/check_docs.py
+git diff --check
+git diff --cached --check
 ```
 
-The checker catches selected unsupported-claim phrases, secret-shaped
-strings, and broken local Markdown links. It does not verify scientific
-results, external links, live service availability, or every possible prose
-claim. Review the evidence and its limitations alongside every result.
+The checker catches selected unsupported-claim phrases, secret-shaped strings,
+and broken local Markdown links. It does not validate scientific results,
+external links, live services, every prose claim, or all forms of private data.
+Review the evidence and disclosure boundary alongside every claim.
 
 ## License
 
-Apache-2.0. See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+[Apache-2.0](LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md) and
+[SECURITY.md](SECURITY.md).

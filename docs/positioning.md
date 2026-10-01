@@ -1,42 +1,41 @@
 # Positioning
 
-**Primary sentence.** Verifiable Labs is an AI model company working toward
-increasingly general, self-improving intelligence.
+**Primary sentence.** Enthym develops AI learning methods, starting with coding
+and using verification to study the quality of feedback.
 
-**Category.** Commercial AI model research and development. Our current
-starting point is verifier-guided post-training of coding models. Evaluation,
-formal specifications, and agent infrastructure support that model program.
+**Research direction.** Increasingly general models that learn reliably from
+experience. World models and AGI are future research goals, not achieved
+capabilities. Verification and evaluation support that program.
 
-**Research thesis.** Feedback that distinguishes useful solutions from
-reward shortcuts may produce better training data and more reliable learned
-capabilities. We test that thesis by changing model parameters and comparing
-performance, transfer, and failures under stated evaluation conditions.
+## Brand and technical identity
 
-## Present work and future direction
+Use **Enthym** for the startup in current prose. Explain once, where useful,
+that public work is hosted by the existing `verifiablelabs` organization and
+retains Verifiable Labs technical identifiers. Preserve repository URLs,
+package names, imports, CLI names, historical citations, and license attribution.
+Brand wording is not an instruction to rename or republish anything.
 
-| Status | How we describe it |
+## Describe status precisely
+
+| Evidence or status | Appropriate language |
 |---|---|
-| Implemented | Filtered supervised fine-tuning with QLoRA adapters on existing open-weight coding models; verification and evaluation tooling |
-| Active research | Learning agents, curriculum control, persistent experience, model adaptation, and transfer between coding task families |
-| Planned | World-model research: learning environment dynamics and using them for planning beyond coding |
-| Long-term goal | Increasingly general models and AGI; this is research ambition, not an achieved capability |
+| Implemented public code | Name the interface or tool and link its source; describe constraints |
+| Synthetic demonstration | Label it illustrative; state the mechanism or format demonstrated |
+| Historical measured report | Name the dataset, endpoint, revision limits, and original interpretation |
+| Planned research | Use “we intend to study” or “research goal” without a capability headline |
+| Service or package availability | Verify the actual release or deployment separately from source code |
 
-Our present training runs adapt other developers' pretrained models. They do
-not establish a new pretrained foundation model. Current learning cycles
-refit fresh adapters from the base model using accumulated experience; they
-should not be described as continuously updating the same weights.
-
-The [research overview](product-overview.md) is the source for current
-claims and evidence. A result in one coding family is not a general-purpose
-capability claim. Product availability must be described separately from
-implemented research or service code.
+The [research overview](product-overview.md) separates these categories. Model
+capability claims need an approved, inspectable evidence package; a verifier
+result or synthetic card is not a model benchmark.
 
 ## Claim boundaries
 
-We do not claim achieved AGI, guaranteed general intelligence, unbounded
-self-improvement, or demonstrated frontier-model capability.
+We do not claim achieved AGI, unbounded self-improvement, demonstrated
+frontier-model capability, or equivalence to OpenAI or Anthropic.
+We do not claim independent certification or a compliance audit from a tool
+report, assurance-card name, checksum, or selected theorem.
 We do not claim that filtering eliminates contamination.
-Generated tasks may resemble a model's unknown pretraining data.
 We do not claim a formally verified system, product, API, or training algorithm.
 
 The formal scope is:
@@ -46,7 +45,5 @@ The formal scope is:
 > mirror has property tests derived from selected definitions; no mechanized
 > code-to-proof parity is claimed.
 
-Keep the assumptions adjacent to any stronger discussion of a theorem.
-Acceptance by a defined gate does not prove that training will find a better
-checkpoint, that a sample estimate equals population performance, or that a
-model has general intelligence.
+State assumptions alongside a theorem. Passing a defined gate does not prove
+a model's generalization, population performance, or service security.
